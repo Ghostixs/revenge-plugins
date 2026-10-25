@@ -25,6 +25,29 @@
           }
         }
       }
+    },
+    "com.ghostixs.usage-tracker": {
+      "name": "Usage Tracker",
+      "description": "DeepSeek $ and Codex % usage, pinned at the top of your channel list.",
+      "author": "Ghostixs <217421149536124938>",
+      "channels": {
+        "latest": "0.1.2"
+      },
+      "versions": {
+        "0.1.2": {
+          "url": "https://ghostixs.github.io/revenge-plugins/dist/com.ghostixs.usage-tracker@0.1.2.zip",
+          "sha256": "5c0ad83d9ed392f21fb9a18708eef21d0e83a72c74e87fce2e2349004e2a95f0",
+          "size": 2552,
+          "dependencies": {
+            "revenge.api": {
+              "version": ">=1.2.1 <2"
+            },
+            "discord": {
+              "version": "*"
+            }
+          }
+        }
+      }
     }
   }
 }

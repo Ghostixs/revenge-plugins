@@ -1,2 +1,4 @@
 plugins/*/build/
 node_modules/
+repo.config.json
+push_codex.py
