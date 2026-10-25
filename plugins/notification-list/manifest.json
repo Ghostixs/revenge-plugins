@@ -4,7 +4,7 @@
 	"name": "Notification List",
 	"description": "See every channel with unread messages and tap to jump straight to it.",
 	"author": "Ghostixs <217421149536124938>",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"dependencies": {
 		"revenge.api": {
 			"version": ">=1 <2"

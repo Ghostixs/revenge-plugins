@@ -14,20 +14,40 @@ function findModuleByProp(prop: string): any {
 interface Notif {
     channelId: string;
     guildId: string | null;
+    guildName: string;
     title: string;
-    subtitle: string;
     mentionCount: number;
     messageId?: string;
 }
 
+interface Group {
+    key: string;
+    name: string;
+    items: Notif[];
+}
+
 function openChannel(notif: Notif) {
-    const mod = findModuleByProp("openDeeplink");
-    if (!mod?.openDeeplink) return;
-    const gid = notif.guildId ?? "@me";
-    const url = notif.messageId
-        ? `https://discord.com/channels/${gid}/${notif.channelId}/${notif.messageId}`
-        : `https://discord.com/channels/${gid}/${notif.channelId}`;
-    mod.openDeeplink(url);
+    // 1. transitionToGuild — the notification-center navigation (confirmed in community plugins)
+    const tg = findModuleByProp("transitionToGuild");
+    if (tg?.transitionToGuild) {
+        tg.transitionToGuild(notif.guildId ?? "@me", notif.channelId, notif.messageId);
+        return;
+    }
+    // 2. jumpToMessage
+    const jm = findModuleByProp("jumpToMessage");
+    if (jm?.jumpToMessage) {
+        jm.jumpToMessage({ channelId: notif.channelId, messageId: notif.messageId, flash: true });
+        return;
+    }
+    // 3. openDeeplink
+    const dl = findModuleByProp("openDeeplink");
+    if (dl?.openDeeplink) {
+        const gid = notif.guildId ?? "@me";
+        const url = notif.messageId
+            ? `https://discord.com/channels/${gid}/${notif.channelId}/${notif.messageId}`
+            : `https://discord.com/channels/${gid}/${notif.channelId}`;
+        dl.openDeeplink(url);
+    }
 }
 
 function markChannelRead(channelId: string, messageId?: string) {
@@ -61,8 +81,8 @@ function gather(): Notif[] {
         out.push({
             channelId: ch.id,
             guildId,
+            guildName: isDm ? "Direct Messages" : (guild?.name ?? "Server"),
             title: isDm ? (ch.name || "DM") : "#" + (ch.name || ch.id),
-            subtitle: isDm ? "Direct Message" : (guild?.name || ""),
             mentionCount: rs.getMentionCount?.(ch.id) ?? 0,
             messageId
         });
@@ -90,6 +110,22 @@ function gather(): Notif[] {
     );
 }
 
+function groupItems(items: Notif[]): Group[] {
+    const groups: Group[] = [];
+    const index = new Map<string, number>();
+    for (const item of items) {
+        const key = item.guildId ?? "__dm__";
+        let gi = index.get(key);
+        if (gi === undefined) {
+            gi = groups.length;
+            index.set(key, gi);
+            groups.push({ key, name: item.guildName, items: [] });
+        }
+        groups[gi].items.push(item);
+    }
+    return groups;
+}
+
 export default plugin({
     start() {},
 
@@ -103,7 +139,7 @@ export default plugin({
             setItems(gather());
         }, [tick]);
 
-        const refresh = () => setTick(t => t + 1);
+        const groups = groupItems(items);
 
         const markAll = () => {
             for (const item of items) markChannelRead(item.channelId, item.messageId);
@@ -111,23 +147,30 @@ export default plugin({
         };
 
         return (
-            <TableRowGroup title="Unread notifications">
-                {items.length === 0 && (
-                    <TableRow label="You're all caught up 🎉" />
+            <>
+                {groups.length === 0 && (
+                    <TableRowGroup title="Unread notifications">
+                        <TableRow label="You're all caught up 🎉" />
+                    </TableRowGroup>
                 )}
-                {items.map(item => (
-                    <TableRow
-                        key={item.channelId}
-                        label={item.mentionCount > 0 ? `${item.title}  (@${item.mentionCount})` : item.title}
-                        subLabel={item.subtitle || undefined}
-                        onPress={() => openChannel(item)}
-                    />
+                {groups.map(group => (
+                    <TableRowGroup key={group.key} title={group.name}>
+                        {group.items.map(item => (
+                            <TableRow
+                                key={item.channelId}
+                                label={item.mentionCount > 0 ? `${item.title}  (@${item.mentionCount})` : item.title}
+                                onPress={() => openChannel(item)}
+                            />
+                        ))}
+                    </TableRowGroup>
                 ))}
-                {items.length > 0 && (
-                    <TableRow label="Mark all read" onPress={markAll} />
-                )}
-                <TableRow label="Refresh" onPress={refresh} />
-            </TableRowGroup>
+                <TableRowGroup title="Actions">
+                    {items.length > 0 && (
+                        <TableRow label="Mark all read" onPress={markAll} />
+                    )}
+                    <TableRow label="Refresh" onPress={() => setTick(t => t + 1)} />
+                </TableRowGroup>
+            </>
         );
     }
 });

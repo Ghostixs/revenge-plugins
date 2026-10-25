@@ -8,16 +8,52 @@
       "description": "See every channel with unread messages and tap to jump straight to it.",
       "author": "Ghostixs <217421149536124938>",
       "channels": {
-        "latest": "1.0.1"
+        "latest": "1.0.2"
       },
       "versions": {
-        "1.0.1": {
-          "url": "https://ghostixs.github.io/revenge-plugins/dist/com.ghostixs.notification-list@1.0.1.zip",
-          "sha256": "8c99f32a2a897621ba8a0ba76d3eb7b3712d8b8dd1a168a55656e145c95cc77c",
-          "size": 1590,
+        "1.0.2": {
+          "url": "https://ghostixs.github.io/revenge-plugins/dist/com.ghostixs.notification-list@1.0.2.zip",
+          "sha256": "6b612f0b6f015cac9627349b724f3557f67d3401acee12b4e94622d32ba7033a",
+          "size": 1803,
           "dependencies": {
             "revenge.api": {
               "version": ">=1 <2"
+            },
+            "discord": {
+              "version": "*"
+            }
+          }
+        }
+      }
+    },
+    "com.ghostixs.usage-tracker": {
+      "name": "Usage Tracker",
+      "description": "DeepSeek $ and Codex % usage, pinned at the top of your channel list.",
+      "author": "Ghostixs <217421149536124938>",
+      "channels": {
+        "latest": "0.1.1"
+      },
+      "versions": {
+        "0.1.0": {
+          "url": "https://ghostixs.github.io/revenge-plugins/dist/com.ghostixs.usage-tracker@0.1.0.zip",
+          "sha256": "b028e01b9b17cefd274b5f09da0857ee4795ea27613a3a91fc5b00c89549f6c2",
+          "size": 2532,
+          "dependencies": {
+            "revenge.api": {
+              "version": ">=1.2.1 <2"
+            },
+            "discord": {
+              "version": "*"
+            }
+          }
+        },
+        "0.1.1": {
+          "url": "https://ghostixs.github.io/revenge-plugins/dist/com.ghostixs.usage-tracker@0.1.1.zip",
+          "sha256": "907ba8c5d41279512c12292197af782fc957ef4d2b51d6a8dde8a1575f0ea4b5",
+          "size": 2564,
+          "dependencies": {
+            "revenge.api": {
+              "version": ">=1.2.1 <2"
             },
             "discord": {
               "version": "*"
