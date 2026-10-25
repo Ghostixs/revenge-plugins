@@ -249,7 +249,7 @@ export default plugin<{ jsonStorage: Settings }>({
                     <TextInput
                         label="DeepSeek API key"
                         value={dsKey}
-                        onChangeText={(v: string) => api.jsonStorage.set({ deepseekKey: v })}
+                        onChange={(v: string) => api.jsonStorage.set({ deepseekKey: v })}
                         placeholder="sk-..."
                         size="md"
                     />
@@ -257,7 +257,7 @@ export default plugin<{ jsonStorage: Settings }>({
                     <TextInput
                         label="Codex feed URL"
                         value={codexUrl}
-                        onChangeText={(v: string) => api.jsonStorage.set({ codexUrl: v })}
+                        onChange={(v: string) => api.jsonStorage.set({ codexUrl: v })}
                         placeholder="https://…/codex.json"
                         size="md"
                     />
