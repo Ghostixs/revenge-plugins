@@ -3,11 +3,11 @@
 	"id": "com.ghostixs.notification-list",
 	"name": "Notification List",
 	"description": "See every channel with unread messages and tap to jump straight to it.",
-	"author": "Ghostixs",
+	"author": "Ghostixs <217421149536124938>",
 	"version": "1.0.0",
 	"dependencies": {
 		"revenge.api": {
-			"version": ">=1.2.1 <2"
+			"version": ">=1 <2"
 		},
 		"discord": {
 			"version": "*"

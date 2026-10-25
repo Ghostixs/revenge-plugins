@@ -1,23 +1,23 @@
 {
   "format": 1,
-  "name": "My Plugin Repository",
-  "description": "Example plugin repository from the Revenge plugin template.",
+  "name": "Ghostixs Plugins",
+  "description": "Jacque's Revenge plugins.",
   "plugins": {
     "com.ghostixs.notification-list": {
       "name": "Notification List",
       "description": "See every channel with unread messages and tap to jump straight to it.",
-      "author": "Ghostixs",
+      "author": "Ghostixs <217421149536124938>",
       "channels": {
         "latest": "1.0.0"
       },
       "versions": {
         "1.0.0": {
           "url": "https://ghostixs.github.io/revenge-plugins/dist/com.ghostixs.notification-list@1.0.0.zip",
-          "sha256": "ea85c5a706d3c4a7d10b9524a196900cfb90a15a05b97bdfcd8c899f091ee0f2",
-          "size": 1567,
+          "sha256": "91c76b60e8f6c22e845f55042f6de7a16e76bb1954da0def6f2cf3e8fd687f9f",
+          "size": 1590,
           "dependencies": {
             "revenge.api": {
-              "version": ">=1.2.1 <2"
+              "version": ">=1 <2"
             },
             "discord": {
               "version": "*"
