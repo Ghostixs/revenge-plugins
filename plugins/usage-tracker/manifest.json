@@ -1,0 +1,19 @@
+{
+	"format": 1,
+	"id": "com.ghostixs.usage-tracker",
+	"name": "Usage Tracker",
+	"description": "DeepSeek $ and Codex % usage, pinned at the top of your channel list.",
+	"author": "Ghostixs <217421149536124938>",
+	"version": "0.1.3",
+	"dependencies": {
+		"revenge.api": {
+			"version": ">=1.2.1 <2"
+		},
+		"discord": {
+			"version": "*"
+		}
+	},
+	"dist": {
+		"script": "index.js"
+	}
+}
