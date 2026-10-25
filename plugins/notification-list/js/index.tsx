@@ -2,7 +2,7 @@ import { Design } from "@revenge-mod/discord/design";
 import { Stores } from "@revenge-mod/discord/flux";
 import { lookupModule } from "@revenge-mod/modules/finders";
 import { withProps } from "@revenge-mod/modules/finders/filters";
-import { useEffect, useState } from "@revenge-mod/react";
+import { useEffect, useState } from "react";
 
 const { TableRowGroup, TableRow } = Design;
 
