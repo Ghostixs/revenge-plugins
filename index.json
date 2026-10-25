@@ -12,7 +12,7 @@
       },
       "versions": {
         "1.0.0": {
-          "url": "https://ghostixs.github.io/revenge-plugins/dist/com.ghostixs.notification-list@1.0.0.zip",
+          "url": "https://cdn.jsdelivr.net/gh/Ghostixs/revenge-plugins@main/dist/com.ghostixs.notification-list@1.0.0.zip",
           "sha256": "91c76b60e8f6c22e845f55042f6de7a16e76bb1954da0def6f2cf3e8fd687f9f",
           "size": 1590,
           "dependencies": {

@@ -7,7 +7,7 @@ Plugins for [Revenge](https://revenge.palmdevs.me/), the Discord Android client 
 In Revenge, go to **Settings → Plugins → Repositories → Add repository** and enter:
 
 ```
-https://ghostixs.github.io/revenge-plugins/index.json
+https://cdn.jsdelivr.net/gh/Ghostixs/revenge-plugins@main/index.json
 ```
 
 Then install plugins from **Browse Plugins**.
