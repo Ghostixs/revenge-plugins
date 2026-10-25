@@ -1,0 +1,19 @@
+{
+	"format": 1,
+	"id": "com.ghostixs.notification-list",
+	"name": "Notification List",
+	"description": "See every channel with unread messages and tap to jump straight to it.",
+	"author": "Ghostixs",
+	"version": "1.0.0",
+	"dependencies": {
+		"revenge.api": {
+			"version": ">=1.2.1 <2"
+		},
+		"discord": {
+			"version": "*"
+		}
+	},
+	"dist": {
+		"script": "index.js"
+	}
+}
