@@ -31,13 +31,13 @@
       "description": "DeepSeek $ and Codex % usage, pinned at the top of your channel list.",
       "author": "Ghostixs <217421149536124938>",
       "channels": {
-        "latest": "0.1.4"
+        "latest": "0.1.5"
       },
       "versions": {
-        "0.1.4": {
-          "url": "https://ghostixs.github.io/revenge-plugins/dist/com.ghostixs.usage-tracker@0.1.4.zip",
-          "sha256": "9a66019cafcaf6c46e0a9dcb19c25a640866bb0347293d4d567fd815316252f5",
-          "size": 2556,
+        "0.1.5": {
+          "url": "https://ghostixs.github.io/revenge-plugins/dist/com.ghostixs.usage-tracker@0.1.5.zip",
+          "sha256": "e912dec34953f7787333045371b6c0dfec4753d8abedb0588d16379fcb8de5ec",
+          "size": 2657,
           "dependencies": {
             "revenge.api": {
               "version": ">=1.2.1 <2"

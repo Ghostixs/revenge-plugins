@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { React, ReactNative } from "@revenge-mod/react";
-import { afterJSX } from "@revenge-mod/react/jsx-runtime";
+import { after } from "@revenge-mod/patcher";
+import { findInTree } from "@revenge-mod/utils/tree";
 import { lookupModule } from "@revenge-mod/modules/finders";
 import { withName } from "@revenge-mod/modules/finders/filters";
 import { Design } from "@revenge-mod/discord/design";
@@ -173,21 +174,31 @@ export default plugin<{ jsonStorage: Settings }>({
             "ChannelList",
             "ChatList",
         ];
+        const patchedPrototypes = new WeakSet<object>();
         for (const name of candidates) {
             try {
                 const found = lookupModule(withName(name));
                 if (!found || !found[0]) continue;
-                const mod: any = found[0];
-                const Comp = mod.default ?? mod;
-                if (typeof Comp !== "function" && typeof Comp !== "object") continue;
+                const channelModule: any = found[0];
+                if (typeof channelModule.default !== "function") continue;
                 cleanup(
-                    afterJSX(Comp, (el: any) => {
-                        if (!el || !el.props) return el;
-                        const prev = el.props.children;
-                        const arr = Array.isArray(prev) ? prev : prev ? [prev] : [];
-                        arr.unshift(<UsageBar key="usage-tracker-bar" />);
-                        el.props.children = arr;
-                        return el;
+                    after(channelModule, "default", (res: any) => {
+                        const prototype = res?.type?.prototype;
+                        if (!prototype || typeof prototype.render !== "function" || patchedPrototypes.has(prototype)) return res;
+                        cleanup(
+                            after(prototype, "render", (list: any) => {
+                                if (!list) return list;
+                                const children = findInTree(list, (x): x is any[] =>
+                                    Array.isArray(x) && x.some((y) => y?.type?.name === "FastList"),
+                                );
+                                if (children && !children.some((child) => child?.key === "usage-tracker-bar")) {
+                                    children.splice(1, 0, React.createElement(UsageBar, { key: "usage-tracker-bar" }));
+                                }
+                                return list;
+                            }),
+                        );
+                        patchedPrototypes.add(prototype);
+                        return res;
                     }),
                 );
                 logger.log("[usage-tracker] pinned readout into " + name);
